@@ -24,7 +24,7 @@ const registermail=async(req,res)=>{
     var email1={
         body:{
             name:username,
-            intro:text||"Welcome to haider private unlimeted",
+            intro:text||"Welcome to haider private unlimited",
             outro:'Need help or to know somthing about the company mail on this email',
         }
     }

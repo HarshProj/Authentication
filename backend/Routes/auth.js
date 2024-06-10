@@ -30,6 +30,9 @@ router.post('/register',async(req,res)=>{
             password:req.body.password,
             profile: ' '||req.body.profile
         })
+        user.save()
+        .then(result=>res.status(200).send({msg:"User Registered Successfully"}))
+        .catch(error=>res.status(500).send({error}));
         const data={
             user:{
                 id:user.id
@@ -105,6 +108,7 @@ router.put("/updateuser",fetchuser,async(req,res)=>{
         return res.status(500).send({error:error});
     }
 })
+router.post("/authenticate",verifyuser,(req,res)=> res.end());
 router.get("/generateotp",verifyuser,localvariable,async(req,res)=>{
     req.app.locals.OTP=await otpGenerator.generate(6,{lowerCaseAlphabets:false,upperCaseAlphabets:false,specialChars:false})
     res.status(200).send({code:req.app.locals.OTP});

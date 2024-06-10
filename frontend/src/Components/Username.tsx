@@ -4,23 +4,23 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
-
+// import { useAuthStore } from '../Store/Store.js';
 import {uservalidation} from '../helper/Validate.tsx'
 const Username = () => {
+  // useAuthStore(state=>console.log(state));
   const path=useNavigate();
   const formik=useFormik({
+
     initialValues : {
-    Username:' '
+    Username:''
     },
     validate:uservalidation,
     validateOnBlur:false,
     validateOnChange:false,
     onSubmit : async values =>{
-      console.log(uservalidation);
-      // if(uservalidation){
-      //   path('./password')
-
-      // }
+      console.log(values);
+      
+        path('/password')
     }
   })
   // const submi=()=>{
@@ -40,7 +40,7 @@ const Username = () => {
         <div className="textbox flex flex-col items-center gap-6 ">
           
           <input type="text" {...formik.getFieldProps('Username')} className={styles.text_box} placeholder='Username'  />
-          <button type='submit' className={styles.btn}>Lets go</button>
+          <button type='submit' style={{backgroundColor:'rgb(99 102 241)'}} className={styles.btn}>Lets go</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500"> Not a member ?<Link className='text-red-500' to='/register'>Register Now</Link></span>

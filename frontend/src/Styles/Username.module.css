@@ -11,6 +11,7 @@
     @apply hover:border-gray-200;
 } 
 .btn{
+    
     @apply border  bg-indigo-500 w-3/4 rounded-lg py-2 text-gray-100 ;
 }
 .btn:hover{

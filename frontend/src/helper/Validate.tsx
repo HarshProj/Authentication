@@ -1,15 +1,6 @@
 import toast from 'react-hot-toast'
-import Username from '../Components/Username';
-export async function uservalidation(values:any){
-    const errors=userverification({},values);
 
-    return errors;
-  }
-export async function passwordvalidate(values:any){
-    const errors=passwordverification({},values);
 
-    return errors;
-  }
   /* validaltion for reset */
 export async function resetpasswordvalidate(values:any){
     const errors=passwordverification({},values);
@@ -20,6 +11,7 @@ export async function resetpasswordvalidate(values:any){
     return errors;
   }
 function userverification(errors:any={},values:any){
+    console.log(values)
     if(!values.Username){
         errors.Username=toast.error("Username Required")
     }else if(values.Username.includes(" ")){
@@ -28,13 +20,15 @@ function userverification(errors:any={},values:any){
     else{
         errors.Username=toast.success("Valid name")
     }
+    return errors;
 
 }
 function passwordverification(errors:any={},values:any){
     const specialchar=/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
+    console.log(values);
     if(!values.Password){
         errors.Password=toast.error("Password Required")
-    }else if(values.Username.includes(" ")){
+    }else if(values.Password.includes(" ")){
         errors.Password=toast.error("WPassword cannot be empty")
     }
     else if(values.Password.length<4){
@@ -42,22 +36,36 @@ function passwordverification(errors:any={},values:any){
     }else if(!specialchar.test(values.Password)){
         errors.Password=toast.error("Password must contains a special character");
     }
+    else{
+        errors.Username=toast.success("Valid Password")
+    }
     return errors;
 
 }
+export async function passwordvalidate(values:any){
+    const errors=passwordverification({},values);
+
+    return errors;
+  }
+export async function uservalidation(values:any){
+    const errors=userverification({},values);
+
+    return errors;
+  }
 export async function registervalidation(values:any){
     const errors =userverification({},values);
     passwordverification(errors,values);
-    emailverify({},values);
+    emailverify(errors,values);
 }
 
 function emailverify(error:any={} ,values:any){
-    if(!values.email){
+    console.log(values)
+    if(!values.Email){
         error.email=toast.error("Enter email...");
     }
-    else if(values.email.include(" ")){
-        error.email=toast.error("Please enter a valid email");
-    }
+    // else if(values.Email.include(" ")){
+    //     error.email=toast.error("Please enter a valid email");
+    // }
     return error;
 }
 export async function validateprofile(values:any){

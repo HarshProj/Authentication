@@ -1,13 +1,13 @@
 import React from 'react'
 import profileimg from '../assets/user.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
 import { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 
 import {passwordvalidate} from '../helper/Validate.tsx'
 const Password = () => {
-
+  const path=useNavigate();
   const formik=useFormik({
     initialValues : {
     Password:'admi@'
@@ -16,6 +16,7 @@ const Password = () => {
     validateOnBlur:false,
     validateOnChange:false,
     onSubmit : async values =>{
+      path('/profile')
       console.log(values)
     }
   })
@@ -33,8 +34,8 @@ const Password = () => {
         </div>
         <div className="textbox flex flex-col items-center gap-6 ">
           {/* {...formik.getFieldProps('Username')} */}
-          <input type="text" {...formik.getFieldProps('Password')} className={styles.text_box} placeholder='Password'  />
-          <button type='submit' className={styles.btn}>Sign in</button>
+          <input type="password" {...formik.getFieldProps('Password')} className={styles.text_box} placeholder='Password'  />
+          <button type='submit' style={{backgroundColor:'rgb(99 102 241)'}}  className={styles.btn}>Sign in</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500">Forget passwords ?<Link className='text-red-500' to='/recovery'>Recover Now</Link></span>
