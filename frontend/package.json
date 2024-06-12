@@ -12,7 +12,10 @@
   "dependencies": {
     "axios": "^1.7.2",
     "dom": "^0.0.3",
+    "dotenv": "^16.4.5",
     "formik": "^2.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -21,6 +24,8 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.2",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
@@ -32,7 +37,7 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
-    "typescript": "^5.0.2",
+    "typescript": "^5.4.5",
     "vite": "^4.3.9"
   }
 }

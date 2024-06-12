@@ -13,33 +13,34 @@ router.post('/register',async(req,res)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()})
-    }
-    try {
-        let user=await User.findOne({email:req.body.email})
-        const user2=await User.findOne({name:req.body.name});
-        if(user2){
-            return res.status(404).json({error:"User with this name is already exists"});
         }
-        if(user){
-            return res.status(404).json({errors:"Sorry this email is already register "})
-        }
-
-        user=await User.create({
-            name:req.body.name,
-            email:req.body.email,
-            password:req.body.password,
-            profile: ' '||req.body.profile
+        try {
+            let user=await User.findOne({email:req.body.Email})
+            const user2=await User.findOne({name:req.body.Username});
+            if(user2){
+                return res.status(404).json({error:"User with this name is already exists"});
+                }
+                if(user){
+                    return res.status(404).json({errors:"Sorry this email is already register "})
+                    }
+                    
+                    // console.log(req.body); 
+        user=await User.create({  
+            name:req.body.Username,
+            email:req.body.Email,
+            password:req.body.Password,
+            profile:req.body.property==' '?' ':req.body.property
         })
-        user.save()
-        .then(result=>res.status(200).send({msg:"User Registered Successfully"}))
-        .catch(error=>res.status(500).send({error}));
+        // user.save()
+        // .then(result=>res.status(200).send({msg:"User Registered Successfully"}))
+        // .catch(error=>res.status(500).send({error}));
         const data={
             user:{
                 id:user.id
             }
         }
         const authtoken=jwt.sign(data,JWT_SECRET);
-        res.json({authtoken});
+        res.json({msg:"User Registered Successfully",authtoken});
     } catch (error) {
         console.log(error.message);
         console.log("Internal server error");

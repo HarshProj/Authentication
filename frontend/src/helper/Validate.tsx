@@ -1,5 +1,21 @@
 import toast from 'react-hot-toast'
-
+import { authenticate } from './helper';
+export async function uservalidation(values:any){
+    const errors=userverification({},values);
+    console.log(values);
+    if(values.Username){
+        const {status}=await authenticate(values.Username);
+        if(status!==200){
+            errors.exist=toast.error("User Does not exits...!");
+            }
+            }
+            return errors;
+            }
+            export async function passwordvalidate(values:any){
+                    const errors=passwordverification({},values);
+                
+                    return errors;
+                  }
 
   /* validaltion for reset */
 export async function resetpasswordvalidate(values:any){
@@ -7,19 +23,20 @@ export async function resetpasswordvalidate(values:any){
 
     if(values.Password !=values.CPassword){
         errors.exist=toast.error("Password Does not match")
+
     }
     return errors;
   }
 function userverification(errors:any={},values:any){
-    console.log(values)
+    // console.log(values)
     if(!values.Username){
         errors.Username=toast.error("Username Required")
     }else if(values.Username.includes(" ")){
         errors.Username=toast.error("Invalid Username")
     }
-    else{
-        errors.Username=toast.success("Valid name")
-    }
+    // else{
+    //     errors.Username=toast.success("Valid name")
+    // }
     return errors;
 
 }
@@ -36,22 +53,9 @@ function passwordverification(errors:any={},values:any){
     }else if(!specialchar.test(values.Password)){
         errors.Password=toast.error("Password must contains a special character");
     }
-    else{
-        errors.Username=toast.success("Valid Password")
-    }
     return errors;
 
 }
-export async function passwordvalidate(values:any){
-    const errors=passwordverification({},values);
-
-    return errors;
-  }
-export async function uservalidation(values:any){
-    const errors=userverification({},values);
-
-    return errors;
-  }
 export async function registervalidation(values:any){
     const errors =userverification({},values);
     passwordverification(errors,values);
@@ -60,7 +64,7 @@ export async function registervalidation(values:any){
 
 function emailverify(error:any={} ,values:any){
     console.log(values)
-    if(!values.Email){
+    if(!values.email){
         error.email=toast.error("Enter email...");
     }
     // else if(values.Email.include(" ")){

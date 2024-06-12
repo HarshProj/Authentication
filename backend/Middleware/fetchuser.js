@@ -1,7 +1,9 @@
 const jwt=require('jsonwebtoken');
 const JWT_SECRET="Userauth";
 const fetchuser=(req,res,next)=>{
+    console.log(req);
     const token=req.header('auth-token');
+    // console.log(token)
     if(!token){
         return res.status(500).json("Invalid token")
     }

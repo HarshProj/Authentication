@@ -1,7 +1,8 @@
 const User=require("../Models/User")
 const verifyuser=async(req,res,next)=>{
     try {
-        const {name}=req.method=='GET'?req.query:req.body;
+        const {name}=(req.method=='GET'?req.query:req.body);
+        // console.log(name)
         let exist=await User.findOne({name:name});
         if(!exist){
             return res.status(404).send({error:"User not found..."});
