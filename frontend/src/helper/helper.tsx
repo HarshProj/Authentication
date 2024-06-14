@@ -98,11 +98,12 @@ export async function resetpassword({username,password}:any){
 /* Get user name from the token */
 export async function getusername(){
     const token=localStorage.getItem('auth-token');
+    // console.log(token);
     if(!token){
         return Promise.reject("Cannot find token");
     }
     const decode= jwtDecode(token);
     
-    console.log(decode)
+    console.log("decoded token is",decode)
     return decode;
 }

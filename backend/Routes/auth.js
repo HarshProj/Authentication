@@ -9,6 +9,7 @@ const verifyuser=require('../Middleware/verifyuser')
 const registermail=require('../Controllers/Mailer')
 const fetchuser=require('../Middleware/fetchuser')
 const localvariable=require('../Middleware/localvariable')
+const bcrypt=require('bcryptjs');
 router.post('/register',async(req,res)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
@@ -25,10 +26,13 @@ router.post('/register',async(req,res)=>{
                     }
                     
                     // console.log(req.body); 
+                    const salt=await bcrypt.genSalt(10);
+                    const hash=await bcrypt.hash(req.body.Password,salt);
+                    console.log(hash);
         user=await User.create({  
             name:req.body.Username,
             email:req.body.Email,
-            password:req.body.Password,
+            password:hash,
             profile:req.body.property==' '?' ':req.body.property
         })
         // user.save()
@@ -58,7 +62,9 @@ router.post('/login',async(req,res)=>{
             return res.status(404).json({error:"User with this name is not found"});
         }
         const pwd=req.body.password;
-        if(pwd!=user.password){
+        const cmp=await bcrypt.compare(req.body.password,user.password);
+        // console.log(req.body.password,user.password,cmp);
+        if(!cmp){
             return res.status(400).json({error:"Incorrect password"})
         }
         const data={
