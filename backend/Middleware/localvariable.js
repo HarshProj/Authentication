@@ -1,8 +1,8 @@
-const localvariable=(req,res,next)=>{
-    req.app.locals={
-        OTP:null,
-        resetSession:false
+const localvariable = (req, res, next) => {
+    if (!req.app.locals) {
+        req.app.locals = {};
     }
+    console.log("localvariable middleware called");
     next();
-}
+};
 module.exports=localvariable;

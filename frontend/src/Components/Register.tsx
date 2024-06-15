@@ -55,7 +55,7 @@ const Register = () => {
           <input type="email" {...formik.getFieldProps('Email')} className={styles.text_box} placeholder='Email'  />
           <input type="text" {...formik.getFieldProps('Username')} className={styles.text_box} placeholder='Username'  />
           <input type="password" {...formik.getFieldProps('Password')} className={styles.text_box} placeholder='Password'  />
-          <button type='submit' className={styles.btn}>Register</button>
+          <button  className={styles.btn}>Register</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500">Already Register ?<Link className='text-red-500' to='/'>Login Now</Link></span>

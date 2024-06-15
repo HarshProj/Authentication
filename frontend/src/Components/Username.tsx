@@ -33,7 +33,7 @@ const Username = () => {
   // const submi=()=>{
   // }
   return (
-    <div className="flex h-screen justify-center">
+    <div className="flex h-screen justify-center ">
       <Toaster position='top-center' reverseOrder={false}></Toaster>
     <div className={styles.glass} >
       <div className=" flex flex-col  items-center w-100">
@@ -47,7 +47,7 @@ const Username = () => {
         <div className="textbox flex flex-col items-center gap-6 ">
           
           <input type="text" {...formik.getFieldProps('Username')} className={styles.text_box} placeholder='Username'  />
-          <button type='submit' style={{backgroundColor:'rgb(99 102 241)'}} className={styles.btn}>Lets go</button>
+          <button  className={styles.btn}>Lets go</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500"> Not a member ?<Link className='text-red-500' to='/register'>Register Now</Link></span>

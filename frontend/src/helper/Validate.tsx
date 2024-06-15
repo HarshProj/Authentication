@@ -2,7 +2,7 @@ import toast from 'react-hot-toast'
 import { authenticate } from './helper';
 export async function uservalidation(values:any){
     const errors=userverification({},values);
-    console.log(values);
+    // console.log(values);
     if(values.Username){
         const {status}=await authenticate(values.Username);
         if(status!==200){
@@ -42,7 +42,7 @@ function userverification(errors:any={},values:any){
 }
 function passwordverification(errors:any={},values:any){
     const specialchar=/[-!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
-    console.log(values);
+    // console.log(values);
     if(!values.Password){
         errors.Password=toast.error("Password Required")
     }else if(values.Password.includes(" ")){
@@ -63,7 +63,7 @@ export async function registervalidation(values:any){
 }
 
 function emailverify(error:any={} ,values:any){
-    console.log(values)
+    // console.log(values)
     if(!values.email){
         error.email=toast.error("Enter email...");
     }

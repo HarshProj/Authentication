@@ -18,23 +18,16 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Username/>}/>
-      </Routes>
-      <Routes>
+      
         <Route path='/register' element={<Register/>}/>
-      </Routes>
-      <Routes>
+      
         <Route path='/password' element={<Password/>}/>
-      </Routes>
-      <Routes>
+      
         <Route path='/profile' element={<Profile/>}/>
-      </Routes>
-      <Routes>
+      
         <Route path='/recovery' element={<Recovery/>}/> 
-      </Routes>
-      <Routes>
+      
         <Route path='/reset' element={<Reset/>}/> 
-      </Routes>
-      <Routes>
         <Route path='*' element={<Pagenotfound/>}/>
       </Routes>
     </Router>

@@ -35,7 +35,7 @@ const Profile = () => {
         success:<b>Successfully Updated</b>,
         error:<b>unable to update</b>
       })
-      console.log(values)
+      // console.log(values)
     }
   })
   const  onupload=async (e:any) =>{

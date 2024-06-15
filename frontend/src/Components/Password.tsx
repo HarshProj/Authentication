@@ -11,7 +11,8 @@ import { login } from '../helper/helper.tsx';
 const Password = () => {
   
   const {auth}=useAuthStore((state)=>state);
-  const [{isLoading,apiData,serverError}]=useFetch(`/getuser/${auth.username}`);
+  const [{isLoading,apiData,serverError}]= useFetch(`/getuser/${auth.username}`);
+  // console.log(apiData.name)
   const path=useNavigate();
   const formik=useFormik({
     initialValues : {
@@ -34,7 +35,7 @@ const Password = () => {
         path('/profile');
       }
       )
-      console.log(values)
+      // console.log(values)
     }
   })
   if(isLoading){
@@ -58,7 +59,7 @@ const Password = () => {
         <div className="textbox flex flex-col items-center gap-6 ">
           {/* {...formik.getFieldProps('Username')} */}
           <input type="password" {...formik.getFieldProps('Password')} className={styles.text_box} placeholder='Password'  />
-          <button type='submit' style={{backgroundColor:'rgb(99 102 241)'}}  className={styles.btn}>Sign in</button>
+          <button   className={styles.btn}>Sign in</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500">Forget passwords ?<Link className='text-red-500' to='/recovery'>Recover Now</Link></span>

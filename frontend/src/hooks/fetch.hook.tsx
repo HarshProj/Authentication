@@ -27,10 +27,11 @@ export default function useFetch(querry:any){
                 }
                 const {data,status}=querry===undefined?await axios.get(`/api/auth/getuser/${x}`): await axios.get(`/api/auth${querry}`);
                 if(status==200){
-                    setData((prev:any)=>({...prev,isLoading:false,apiData:data.info}))
+                    setData((prev:any)=>({...prev,isLoading:false,apiData:data.data}))
                     setData((prev:any)=>({...prev,status:status}))
                     }
                     setData((prev)=>({...prev,isLoading:false}))
+                    // console.log(getData);
                     
             } catch (error) {
                 setData((prev:any)=>({...prev,isLoading:false,serverError:error}))

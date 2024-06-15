@@ -7,6 +7,7 @@ axios.defaults.baseURL="http://localhost:5000";
 /*Authenticate */
 export async function authenticate(username:any){
     try {
+        // console.log(username)
         const {status}= await axios.post('/api/auth/authenticate',{name:username})
         return {status};
     } catch (error) {
@@ -18,6 +19,7 @@ export async function authenticate(username:any){
 export async function getuser({username}:any){
     try {
         const {data}=await axios.get(`api/auth/getuser/${username}`)
+        // console.log(data);
         return data;
     } catch (error) {
         return Promise.reject({error});
@@ -59,15 +61,18 @@ export async function updateUser(response:any){
     }
 }
 /* generate otp*/
-export async function generateotp(username:any){
+export async function generateotp(name:any){
     try {
-        const token=await localStorage.getItem('auth-token');
+        // const token=await localStorage.getItem('auth-token');
         // const {data}= await axios.post('/api/auth/updateuser',response,{headers:{"auth-token":`Bearer ${token}`}})
-        const {data:{code},status}= await axios.get('/api/auth/verifyotp',{params:{username}})
-        if(status==200){
-            let {data:{email}}= await getuser({username});
+        const {data:{code},status}= await axios.get('/api/auth/generateotp',{params:{name}})
+        console.log(code);
+        localStorage.setItem('OTP',code);
+        if(status===200){
+            let {data}= await getuser({username:name});
+            console.log(data.email)
             let text=`Your Password OTP is ${code}.Verify and recover your password`;
-            await axios.post('api/auth/registermail',{username,userEmail:email,text,subject:"Pssword recovery OTP"});
+            await axios.post('api/auth/registermail',{username:name,useremail:data.email,text,subject:"Pssword recovery OTP"});
         }
         return Promise.resolve(code);
     } catch (error) {
@@ -79,7 +84,7 @@ export async function generateotp(username:any){
 export async function verifyotp({username,code}:any){
     try {
         
-        const {data,status}=await axios.get('api/auth/verifyotp',{params:{username,code}});
+        const {data,status}=await axios.get('api/auth/verifyotp',{params:{name:username,code}});
         return {data,status};
     } catch (error) {
         return Promise.reject({error});

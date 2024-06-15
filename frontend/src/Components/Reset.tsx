@@ -10,8 +10,8 @@ const Reset = () => {
 
   const formik=useFormik({
     initialValues : {
-    Password:' ',
-    CPassword:' '
+    Password:' admin@123',
+    CPassword:' admin@13'
     },
     validate:resetpasswordvalidate,
     validateOnBlur:false,
@@ -34,7 +34,7 @@ const Reset = () => {
           {/* {...formik.getFieldProps('Username')} */}
           <input type="text" {...formik.getFieldProps('Password')} className={styles.text_box} placeholder='Password'  />
           <input type="text" {...formik.getFieldProps('CPassword')} className={styles.text_box} placeholder='CPassword'  />
-          <button type='submit' className={styles.btn}>Sign in</button>
+          <button  className={styles.btn}>Sign in</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500">Forget passwords ?<Link className='text-red-500' to='/recovery'>Recover Now</Link></span>

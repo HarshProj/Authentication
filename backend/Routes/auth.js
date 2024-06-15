@@ -90,8 +90,9 @@ router.get("/getuser/:name",async(req,res)=>{
         if(!name){
             return res.status(501).send({error:"Invalid user name"})
         }
-        const info=await User.findOne({name}).select("-password");
-        res.status(200).send({info});
+        const data=await User.findOne({name}).select("-password");
+        res.status(200).send({data});
+        // console.log(data.name);
         
     } catch (error) {
         res.send(error);
@@ -117,18 +118,25 @@ router.put("/updateuser",fetchuser,async(req,res)=>{
 })
 router.post("/authenticate",verifyuser,(req,res)=> res.end());
 router.get("/generateotp",verifyuser,localvariable,async(req,res)=>{
-    req.app.locals.OTP=await otpGenerator.generate(6,{lowerCaseAlphabets:false,upperCaseAlphabets:false,specialChars:false})
-    res.status(200).send({code:req.app.locals.OTP});
+    req.app.locals.OTP=await otpGenerator.generate(6,{
+        lowerCaseAlphabets:false,
+        upperCaseAlphabets:false,
+        specialChars:false})
+    return res.status(200).send({code:req.app.locals.OTP});
 })
 router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{
-    const {code}=req.query;
-    console.log(req.app.locals.OTP)
-    if(parseInt(req.app.locals.OTP)===parseInt(code)){
-        req.app.locals.OTP=null;
-        req.app.locals.resetsession=true;
-        return res.status(201).send({msg:"Verified Sucessfully"})
+    const { code } = req.query;
+    
+    // console.log("Stored OTP:", req.app.locals.OTP); // Log the stored OTP
+    // console.log("Received code:", code); // Log the received code
+    
+    if (parseInt(req.app.locals.OTP) === parseInt(code)) {
+        req.app.locals.OTP = null;
+        req.app.locals.resetsession = true;
+        return res.status(201).send({ msg: "Verified Successfully" });
     }
-    return res.status(400).send({error:"Invalid OTP..."})
+    // console.log(req.app.locals, code);
+    return res.status(400).send({ error: "Invalid OTP..." });
 })
 router.get("/createresetsession",localvariable,async(req,res)=>{
     if(req.app.locals.resetsession){
