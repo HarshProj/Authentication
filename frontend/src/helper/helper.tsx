@@ -97,8 +97,9 @@ export async function resetpassword({username,password}:any){
 }
 /* Get user name from the token */
 export async function getusername(){
-    const token=localStorage.getItem('auth-token');
-    // console.log(token);
+    console.log("Fetchin the token");
+    const token= localStorage.getItem("auth-token");
+    console.log(token);
     if(!token){
         return Promise.reject("Cannot find token");
     }

@@ -12,8 +12,8 @@ import { updateUser } from '../helper/helper.tsx';
 const Profile = () => {
   const [file,setFile]=useState();
   const {auth}=useAuthStore((state)=>state);
-  const [{isLoading,apiData,serverError}]=useFetch(`/getuser/${auth.username}`);
-  // const [{isLoading,apiData,serverError}]=useFetch();
+  // const [{isLoading,apiData,serverError}]=useFetch(`/getuser/${auth.username}`);
+  const [{isLoading,apiData,serverError}]=useFetch();
   const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {

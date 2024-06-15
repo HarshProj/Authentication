@@ -10,10 +10,10 @@ import {uservalidation} from '../helper/Validate.tsx'
 const Username = () => {
   const {setusername,auth}=useAuthStore((state)=>state);
   // e.preventdefault()
-  useEffect(() => {
-    console.log(auth.username);
+  // useEffect(() => {
+  //   console.log(auth.username);
     
-  })
+  // })
   
   const path=useNavigate();
   const formik=useFormik({
