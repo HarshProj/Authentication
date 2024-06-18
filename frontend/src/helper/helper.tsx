@@ -32,7 +32,7 @@ export async function registeruser(credentials:any){
         const {Username,Email}=credentials;
         if(status==200){
             await axios.post('api/auth/registermail',{username:Username,useremail:Email,text:msg})
-        }
+        } 
 
         return Promise.resolve(msg) ;
     } catch (error) {
@@ -94,7 +94,7 @@ export async function verifyotp({username,code}:any){
 export async function resetpassword({username,password}:any){
     try {
         
-        const {data,status}=await axios.get('api/auth/resetPassword',{params:{username,password}});
+        const {data,status}=await axios.put('api/auth/resetPassword',{params:{username,password}});
         return {data,status};
     } catch (error) {
         return Promise.reject({error});

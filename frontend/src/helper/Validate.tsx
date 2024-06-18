@@ -20,8 +20,8 @@ export async function uservalidation(values:any){
   /* validaltion for reset */
 export async function resetpasswordvalidate(values:any){
     const errors=passwordverification({},values);
-
-    if(values.Password !=values.CPassword){
+// console.log(values)
+    if(values.Password!==values.CPassword){
         errors.exist=toast.error("Password Does not match")
 
     }

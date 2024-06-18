@@ -1,23 +1,33 @@
 import React from 'react'
 import profileimg from '../assets/user.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
-
+import { resetpassword } from '../helper/helper.tsx';
 import {resetpasswordvalidate} from '../helper/Validate.tsx'
+import { useAuthStore } from '../Store/Store.tsx';
 const Reset = () => {
-
+const {auth}=useAuthStore((state)=>state)
+const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {
-    Password:' admin@123',
-    CPassword:' admin@13'
+    Password:'admin@123',
+    CPassword:'admin@13'
     },
     validate:resetpasswordvalidate,
     validateOnBlur:false,
     validateOnChange:false,
     onSubmit : async values =>{
-      console.log(values)
+      let resetpromise=resetpassword({username:auth.username,password:values.Password});
+      toast.promise(resetpromise,{
+        success:<b>Reset Successfully</b>,
+        loading:'Updating...',
+        error:<b>Could not update</b>
+      })
+      resetpromise.then(()=>{
+          navigate('/password')
+      })
     }
   })
   return (
@@ -34,7 +44,7 @@ const Reset = () => {
           {/* {...formik.getFieldProps('Username')} */}
           <input type="text" {...formik.getFieldProps('Password')} className={styles.text_box} placeholder='Password'  />
           <input type="text" {...formik.getFieldProps('CPassword')} className={styles.text_box} placeholder='CPassword'  />
-          <button  className={styles.btn}>Sign in</button>
+          <button  className={styles.btn}>Reset</button>
         </div>
         <div className="text-center py-4">
           <span className="text-gray-500">Forget passwords ?<Link className='text-red-500' to='/recovery'>Recover Now</Link></span>

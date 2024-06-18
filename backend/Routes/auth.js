@@ -25,7 +25,7 @@ router.post('/register',async(req,res)=>{
                     return res.status(404).json({errors:"Sorry this email is already register "})
                     }
                     
-                    // console.log(req.body); 
+                    console.log(req.body); 
                     const salt=await bcrypt.genSalt(10);
                     const hash=await bcrypt.hash(req.body.Password,salt);
                     console.log(hash);
@@ -129,38 +129,43 @@ router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{
     
     // console.log("Stored OTP:", req.app.locals.OTP); // Log the stored OTP
     // console.log("Received code:", code); // Log the received code
-    
     if (parseInt(req.app.locals.OTP) === parseInt(code)) {
         req.app.locals.OTP = null;
-        req.app.locals.resetsession = true;
+        req.app.locals.resetSession = true;
+        console.log(req.app.locals.resetSession);
         return res.status(201).send({ msg: "Verified Successfully" });
     }
     // console.log(req.app.locals, code);
     return res.status(400).send({ error: "Invalid OTP..." });
 })
 router.get("/createresetsession",localvariable,async(req,res)=>{
-    if(req.app.locals.resetsession){
-        req.app.locals.resetsession=false;
-        return res.status(201).send({msg:"Acess granted"})
+    if(req.app.locals.resetSession){
+        
+        return res.status(201).send({flag:req.app.locals.resetSession})
     }
     return res.status(400).send({error:"Session Expired..."})
 })
 router.put("/resetPassword",localvariable,async(req,res)=>{
-    const {name,password}=req.body;
-    if(!res.app.locals.resetsession){
-        return res.status(400).send({error:"Session Expired..."});
-    }
-    try {
-        const data=User.findOne({name});
-        if(!data){
-            res.status(400).send("User name not found");
+    const {username,password}=req.body.params;
+    if(!res.app.locals.resetSession){
+        console.log("Session Expired")
+            return res.status(400).send({error:"Session Expired..."});
         }
-        const d=await User.updateOne({name:name},{password:password});
-        if(!d){
-            return res.status(400).send(d);
-        }
-        req.app.locals.resetsession=false;
-        return res.status(200).send({msg:"Record Updated..."});
+        try {
+            const data=await User.findOne({name:username});
+            if(!data){
+                res.status(400).send("User name not found");
+            }
+            const salt=await bcrypt.genSalt(10);
+            const hash=await bcrypt.hash(password,salt);
+            const d=await User.updateOne({name:username},{password:hash})
+                if(!d){
+                    return res.status(400).send(err);
+                }
+                
+                req.app.locals.resetSession=false;
+                return res.status(200).send({msg:"Record Updated..."});
+        
 
     } catch (error) {
         return res.status(401).send({error})

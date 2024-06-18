@@ -1,14 +1,14 @@
 const nodemailer = require("nodemailer");
 const Mailgen = require('mailgen')
-const Email="florida.orn30@ethereal.email"
-const Password="KsCzn2pPd6QZBhgrbU"
+const Email="susan.tremblay@ethereal.email"
+const Password="pjsp7NhF9EGwN2nUuS"
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'alicia.mueller@ethereal.email',
-        pass: 'ENs2XbUY8QGENw9uhs'
+        user: 'susan.tremblay@ethereal.email',
+        pass: 'pjsp7NhF9EGwN2nUuS'
     }
 });
  let mailgenerator=new Mailgen({
