@@ -52,7 +52,7 @@ const Recovery = () => {
     })
   }
   return (
-    <div className="flex h-screen justify-center">
+    <div className="flex h-full justify-center">
       <Toaster position='top-center' reverseOrder={false}></Toaster>
     <div className={styles.glass} >
       <div className=" flex flex-col  items-center w-100">

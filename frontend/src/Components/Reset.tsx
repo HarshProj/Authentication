@@ -36,10 +36,18 @@ const navigate=useNavigate();
     }
   })
   if(isLoading){
-    return <h1 className="text-2xl,font-bold">isLoading ...</h1>
+    return (
+    <div className="flex h-screen w-full justify-center items-center">
+
+    <h1 className="text-2xl font-bold">isLoading ...</h1>
+    </div>)
   }
   if(serverError){
-    return <h1 className="text-xl,text-red-500">{serverError.message}</h1>
+    return (
+      <div className="flex h-screen w-full justify-center items-center">
+  
+  <h1 className="text-xl,text-red-500">{serverError.message}</h1>
+      </div>)
   }
   if(status&&status!==200){
     <Navigate to='/password' replace={true}></Navigate>

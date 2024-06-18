@@ -9,7 +9,7 @@ const verifyuser=require('../Middleware/verifyuser')
 const registermail=require('../Controllers/Mailer')
 const fetchuser=require('../Middleware/fetchuser')
 const localvariable=require('../Middleware/localvariable')
-const bcrypt=require('bcryptjs');
+const bcrypt=require('bcryptjs'); 
 router.post('/register',async(req,res)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
@@ -138,7 +138,7 @@ router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{
     return res.status(400).send({ error: "Invalid OTP..." });
 })
 router.get("/createresetsession",localvariable,async(req,res)=>{
-    console.log(req.app.locals.resetSession)
+    // console.log(req.app.locals.resetSession)
     if(req.app.locals.resetSession){
         return res.status(200).send({data:{flag:req.app.locals.resetSession}})
     }
@@ -146,7 +146,7 @@ router.get("/createresetsession",localvariable,async(req,res)=>{
 })
 router.put("/resetPassword",verifyuser,localvariable,async(req,res)=>{
     const {name,password}=req.body;
-    console.log("Session Expired",req.app.locals.resetSession,name,password) 
+    // console.log("Session Expired",req.app.locals.resetSession,name,password) 
     if(!res.app.locals.resetSession){
             return res.status(400).send({error:"Session Expired..."});
         }

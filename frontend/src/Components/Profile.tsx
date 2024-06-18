@@ -43,14 +43,21 @@ const Profile = () => {
     setFile(base64);
   }
   if(isLoading){
-    return <h1 className="text-2xl,font-bold">isLoading ...</h1>
+    return (
+    <div className="flex h-screen w-full justify-center items-center">
+
+    <h1 className="text-2xl font-bold">isLoading ...</h1>
+    </div>)
   }
   if(serverError){
-    return <h1 className="text-xl,text-red-500">{serverError.message}</h1>
+    return (
+      <div className="flex h-screen w-full justify-center items-center">
+  
+  <h1 className="text-xl,text-red-500">{serverError.message}</h1>
+      </div>)
   }
-
   return (
-    <div className="flex h-screen justify-center">
+    <div className="flex h-screen justify-center ">
       <Toaster position='top-center' reverseOrder={false}></Toaster>
     <div className={styles.glass} style={{width:"45%",paddingTop:'3rem'}} >
       <div className=" flex flex-col  items-center w-100">
@@ -75,11 +82,11 @@ const Profile = () => {
           <input type="text" {...formik.getFieldProps('mobile')} className={styles.text_box} placeholder='Mobile'  />
           <input type="email" {...formik.getFieldProps('email')}  className={styles.text_box} placeholder='Email'  />
         </div>
-        <div className="flex w-full   justify-center">
+        <div className="flex w-full justify-center">
           <input type="text" {...formik.getFieldProps('address')} className={styles.text_box} placeholder='Address'  />
 
         </div>
-          <button type='submit' className={styles.btn}>Update</button>
+          <button  className={styles.btn}>Update</button>
         <div className="text-center py-4">
           <span className="text-gray-500">Came back later?<Link className='text-red-500' onClick={()=>{localStorage.removeItem('auth-token') ,navigate('/')}} to='/'>Log out</Link></span>
         </div>

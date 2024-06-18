@@ -5,7 +5,6 @@ const localvariable = (req, res, next) => {
             resetSession : false,
         };
     }
-    console.log("localvariable middleware called");
     next();
 };
 module.exports=localvariable;

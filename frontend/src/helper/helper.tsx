@@ -66,11 +66,11 @@ export async function generateotp(name:any){
         // const token=await localStorage.getItem('auth-token');
         // const {data}= await axios.post('/api/auth/updateuser',response,{headers:{"auth-token":`Bearer ${token}`}})
         const {data:{code},status}= await axios.get('/api/auth/generateotp',{params:{name}})
-        console.log(code);
-        localStorage.setItem('OTP',code);
+        // console.log(code);
+        // localStorage.setItem('OTP',code);
         if(status===200){
             let {data}= await getuser({username:name});
-            console.log(data.email)
+            // console.log(data.email)
             let text=`Your Password OTP is ${code}.Verify and recover your password`;
             await axios.post('api/auth/registermail',{username:name,useremail:data.email,text,subject:"Pssword recovery OTP"});
         }
