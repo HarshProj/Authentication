@@ -75,6 +75,7 @@ router.post('/login',async(req,res)=>{
             }
         }
         const authtoken=jwt.sign(data,JWT_SECRET);
+        // console.log(cmp);
         return res.status(200).send({
             msg:"Login Sucessfully",
             name:user.name,

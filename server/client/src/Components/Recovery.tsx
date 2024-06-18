@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import profileimg from '../assets/user.png'
+import  { useEffect, useState } from 'react'
+// import profileimg from '../assets/user.png'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
 import toast, { Toaster } from 'react-hot-toast';
-import { useFormik } from 'formik';
+// import { useFormik } from 'formik';
 
-import {passwordvalidate} from '../helper/Validate.tsx'
+// import {passwordvalidate} from '../helper/Validate.tsx'
 import { useAuthStore } from '../Store/Store.tsx';
 import { generateotp, verifyotp } from '../helper/helper.tsx';
 const Recovery = () => {

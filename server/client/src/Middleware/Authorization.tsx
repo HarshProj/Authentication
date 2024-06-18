@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom"
 import { useAuthStore } from "../Store/Store"
 
-export const Protect = ({children}) => {
+export const Protect = ({children}:any) => {
     const {auth}=useAuthStore((state)=>state)
     // const {auth}=useAuthStore(state=>{state})
     if(!auth.username){
@@ -11,7 +11,7 @@ export const Protect = ({children}) => {
     children
   )
 }
-export const Authorization = ({ children }) => {
+export const Authorization = ({ children }:any) => {
     const token = localStorage.getItem('auth-token');
 
     if(!token){

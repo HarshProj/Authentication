@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import profileimg from '../assets/user.png'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
@@ -6,14 +6,15 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import  {converttobase64} from '../helper/Convert.tsx'
 import {validateprofile} from '../helper/Validate.tsx'
-import useFetch from '../hooks/fetch.hook.tsx';
-import { useAuthStore } from '../Store/Store.tsx';
+import useFetch from '../hooks/fetch.tsx';
+// import { useAuthStore } from '../Store/Store.tsx';
 import { updateUser } from '../helper/helper.tsx';
 const Profile = () => {
   const [file,setFile]=useState();
-  const {auth}=useAuthStore((state)=>state);
+  // const {auth}=useAuthStore((state)=>state);
   // const [{isLoading,apiData,serverError}]=useFetch(`/getuser/${auth.username}`);
-  const [{isLoading,apiData,serverError}]=useFetch();
+  const [{isLoading,apiData,serverError}]=useFetch('');
+  console.log(apiData)
   const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {

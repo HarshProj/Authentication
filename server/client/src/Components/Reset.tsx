@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react'
-import profileimg from '../assets/user.png'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
 import toast, { Toaster } from 'react-hot-toast';
@@ -7,9 +5,9 @@ import { useFormik } from 'formik';
 import { resetpassword } from '../helper/helper.tsx';
 import {resetpasswordvalidate} from '../helper/Validate.tsx'
 import { useAuthStore } from '../Store/Store.tsx';
-import useFetch from '../hooks/fetch.hook.tsx';
+import useFetch from '../hooks/fetch.tsx';
 const Reset = () => {
-  const [{isLoading,apiData,serverError,status}]=useFetch('/createresetsession')
+  const [{isLoading,serverError,status}]=useFetch('/createresetsession')
   const {auth}=useAuthStore((state)=>state)
 //   useEffect(()=>{
 // console.log(apiData,status)

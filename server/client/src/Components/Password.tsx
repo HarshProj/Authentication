@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 import profileimg from '../assets/user.png'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
 import toast , { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
-import useFetch from '../hooks/fetch.hook.tsx'
+import useFetch from '../hooks/fetch.tsx'
 import {useAuthStore} from '../Store/Store'
 import {passwordvalidate} from '../helper/Validate.tsx'
 import { login } from '../helper/helper.tsx';

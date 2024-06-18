@@ -1,4 +1,4 @@
-import React ,{useEffect}from 'react'
+// import {useEffect}from 'react'
 import profileimg from '../assets/user.png'
 import { Link, useNavigate} from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
@@ -8,7 +8,7 @@ import {useAuthStore} from '../Store/Store'
 
 import {uservalidation} from '../helper/Validate.tsx'
 const Username = () => {
-  const {setusername,auth}=useAuthStore((state)=>state);
+  const {setusername}=useAuthStore((state)=>state);
   // e.preventdefault()
   // useEffect(() => {
   //   console.log(auth.username);
