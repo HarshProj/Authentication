@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import profileimg from '../assets/user.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styles from '../Styles/Username.module.css'
 import toast, { Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { resetpassword } from '../helper/helper.tsx';
 import {resetpasswordvalidate} from '../helper/Validate.tsx'
 import { useAuthStore } from '../Store/Store.tsx';
+import useFetch from '../hooks/fetch.hook.tsx';
 const Reset = () => {
-const {auth}=useAuthStore((state)=>state)
+  const [{isLoading,apiData,serverError,status}]=useFetch('/createresetsession')
+  const {auth}=useAuthStore((state)=>state)
+  useEffect(()=>{
+console.log(apiData,status)
+})
 const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {
@@ -30,6 +35,15 @@ const navigate=useNavigate();
       })
     }
   })
+  if(isLoading){
+    return <h1 className="text-2xl,font-bold">isLoading ...</h1>
+  }
+  if(serverError){
+    return <h1 className="text-xl,text-red-500">{serverError.message}</h1>
+  }
+  if(status&&status!==200){
+    <Navigate to='/password' replace={true}></Navigate>
+  }
   return (
     <div className="flex h-screen justify-center">
       <Toaster position='top-center' reverseOrder={false}></Toaster>

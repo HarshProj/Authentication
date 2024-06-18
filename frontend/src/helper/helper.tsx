@@ -94,7 +94,8 @@ export async function verifyotp({username,code}:any){
 export async function resetpassword({username,password}:any){
     try {
         
-        const {data,status}=await axios.put('api/auth/resetPassword',{params:{username,password}});
+        const {data,status}=await axios.put('api/auth/resetPassword',{name:username,password});
+        console.log(data,status)
         return {data,status};
     } catch (error) {
         return Promise.reject({error});

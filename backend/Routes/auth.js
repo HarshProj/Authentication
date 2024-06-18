@@ -126,7 +126,6 @@ router.get("/generateotp",verifyuser,localvariable,async(req,res)=>{
 })
 router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{
     const { code } = req.query;
-    
     // console.log("Stored OTP:", req.app.locals.OTP); // Log the stored OTP
     // console.log("Received code:", code); // Log the received code
     if (parseInt(req.app.locals.OTP) === parseInt(code)) {
@@ -139,33 +138,33 @@ router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{
     return res.status(400).send({ error: "Invalid OTP..." });
 })
 router.get("/createresetsession",localvariable,async(req,res)=>{
+    console.log(req.app.locals.resetSession)
     if(req.app.locals.resetSession){
-        
-        return res.status(201).send({flag:req.app.locals.resetSession})
+        return res.status(200).send({data:{flag:req.app.locals.resetSession}})
     }
     return res.status(400).send({error:"Session Expired..."})
 })
-router.put("/resetPassword",localvariable,async(req,res)=>{
-    const {username,password}=req.body.params;
+router.put("/resetPassword",verifyuser,localvariable,async(req,res)=>{
+    const {name,password}=req.body;
+    console.log("Session Expired",req.app.locals.resetSession,name,password) 
     if(!res.app.locals.resetSession){
-        console.log("Session Expired")
             return res.status(400).send({error:"Session Expired..."});
         }
         try {
-            const data=await User.findOne({name:username});
+            const data=await User.findOne({name:name});
             if(!data){
                 res.status(400).send("User name not found");
             }
             const salt=await bcrypt.genSalt(10);
             const hash=await bcrypt.hash(password,salt);
-            const d=await User.updateOne({name:username},{password:hash})
-                if(!d){
+            const d=await User.updateOne({name:name},{password:hash})
+                if(!d.acknowledged){
                     return res.status(400).send(err);
                 }
+                // console.log(d);
                 
                 req.app.locals.resetSession=false;
                 return res.status(200).send({msg:"Record Updated..."});
-        
 
     } catch (error) {
         return res.status(401).send({error})

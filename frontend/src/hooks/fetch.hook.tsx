@@ -17,21 +17,21 @@ export default function useFetch(querry:any){
                 
                 const token= localStorage.getItem("auth-token");
                 let x;
-                // console.log(querry)
                 if(token){
-
+                    
                     const decode= jwtDecode(token);
                     x=querry===undefined?decode.user.name:'';
                     // const name=!querry?(x.user.name):'';
                     //querry===''? await axios.get(`/api/auth/getuser/${x.user.name}`):
                 }
                 const {data,status}=querry===undefined?await axios.get(`/api/auth/getuser/${x}`): await axios.get(`/api/auth${querry}`);
+                // console.log(querry,data,status)
                 if(status==200){
                     setData((prev:any)=>({...prev,isLoading:false,apiData:data.data}))
-                    setData((prev:any)=>({...prev,status:status}))
+                    setData((prev:any)=>({...prev,status:status})) 
                     }
                     setData((prev)=>({...prev,isLoading:false}))
-                    // console.log(getData);
+                    console.log(getData);
                     
             } catch (error) {
                 setData((prev:any)=>({...prev,isLoading:false,serverError:error}))
