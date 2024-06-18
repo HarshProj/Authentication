@@ -1,14 +1,12 @@
 const nodemailer = require("nodemailer");
 const Mailgen = require('mailgen')
-const Email="susan.tremblay@ethereal.email"
-const Password="pjsp7NhF9EGwN2nUuS"
-
+require('dotenv').config()
 const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'susan.tremblay@ethereal.email',
-        pass: 'pjsp7NhF9EGwN2nUuS'
+        user: process.env.Email,
+        pass: process.env.Password
     }
 });
  let mailgenerator=new Mailgen({
@@ -30,7 +28,7 @@ const registermail=async(req,res)=>{
     }
     var emailbody=await mailgenerator.generate(email1);
     let message ={
-        from: Email, // sender address
+        from: process.env.Email, // sender address
         to: useremail, // list of receivers
         subject: subject||"Hello ✔", // Subject line
         text: text ||"Hello world?", // plain text body

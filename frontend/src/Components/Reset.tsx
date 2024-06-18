@@ -11,9 +11,9 @@ import useFetch from '../hooks/fetch.hook.tsx';
 const Reset = () => {
   const [{isLoading,apiData,serverError,status}]=useFetch('/createresetsession')
   const {auth}=useAuthStore((state)=>state)
-  useEffect(()=>{
-console.log(apiData,status)
-})
+//   useEffect(()=>{
+// console.log(apiData,status)
+// })
 const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {

@@ -25,10 +25,10 @@ router.post('/register',async(req,res)=>{
                     return res.status(404).json({errors:"Sorry this email is already register "})
                     }
                     
-                    console.log(req.body); 
                     const salt=await bcrypt.genSalt(10);
                     const hash=await bcrypt.hash(req.body.Password,salt);
-                    console.log(hash);
+                    // console.log(hash);
+                    // console.log(req.body); 
         user=await User.create({  
             name:req.body.Username,
             email:req.body.Email,
@@ -48,6 +48,7 @@ router.post('/register',async(req,res)=>{
     } catch (error) {
         console.log(error.message);
         console.log("Internal server error");
+        res.send({error});
     }
 
 })
@@ -61,7 +62,7 @@ router.post('/login',async(req,res)=>{
         if(!user){
             return res.status(404).json({error:"User with this name is not found"});
         }
-        const pwd=req.body.password;
+        // const pwd=req.body.password;
         const cmp=await bcrypt.compare(req.body.password,user.password);
         // console.log(req.body.password,user.password,cmp);
         if(!cmp){
@@ -82,6 +83,7 @@ router.post('/login',async(req,res)=>{
     } catch (error) {
         console.log(error.message);
         console.log("Internal server error");
+        res.send({error});
     }
 })
 router.get("/getuser/:name",async(req,res)=>{
@@ -131,7 +133,7 @@ router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{
     if (parseInt(req.app.locals.OTP) === parseInt(code)) {
         req.app.locals.OTP = null;
         req.app.locals.resetSession = true;
-        console.log(req.app.locals.resetSession);
+        // console.log(req.app.locals.resetSession);
         return res.status(201).send({ msg: "Verified Successfully" });
     }
     // console.log(req.app.locals, code);

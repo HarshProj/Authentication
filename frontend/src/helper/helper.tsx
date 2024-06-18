@@ -95,7 +95,7 @@ export async function resetpassword({username,password}:any){
     try {
         
         const {data,status}=await axios.put('api/auth/resetPassword',{name:username,password});
-        console.log(data,status)
+        // console.log(data,status)
         return {data,status};
     } catch (error) {
         return Promise.reject({error});
@@ -103,14 +103,14 @@ export async function resetpassword({username,password}:any){
 }
 /* Get user name from the token */
 export async function getusername(){
-    console.log("Fetchin the token");
+    // console.log("Fetchin the token");
     const token= localStorage.getItem("auth-token");
-    console.log(token);
+    // console.log(token);
     if(!token){
         return Promise.reject("Cannot find token");
     }
     const decode= jwtDecode(token);
     
-    console.log("decoded token is",decode)
+    // console.log("decoded token is",decode)
     return decode;
 }

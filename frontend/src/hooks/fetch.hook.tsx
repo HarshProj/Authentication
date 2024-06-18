@@ -31,7 +31,7 @@ export default function useFetch(querry:any){
                     setData((prev:any)=>({...prev,status:status})) 
                     }
                     setData((prev)=>({...prev,isLoading:false}))
-                    console.log(getData);
+                    // console.log(getData);
                     
             } catch (error) {
                 setData((prev:any)=>({...prev,isLoading:false,serverError:error}))
