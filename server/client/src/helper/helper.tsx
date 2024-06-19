@@ -3,7 +3,7 @@ import axios from 'axios'
 // axios.defaults.baseURL=import.meta.env.REACT_APP_SERVER_DOMAIN;
 import {jwtDecode} from 'jwt-decode'
 
-axios.defaults.baseURL="http://localhost:5000";
+// axios.defaults.baseURL="http://localhost:5000";
 /*Authenticate */
 export async function authenticate(username:any){
     try {
