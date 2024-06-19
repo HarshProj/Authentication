@@ -6,4 +6,4 @@ const connecttodb=async()=>{
     mongoose.connection
     .once("open",()=> console.log("Connected"))
 }
-module.exports=connecttodb;
+module.exports=connecttodb; 

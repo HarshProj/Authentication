@@ -82,7 +82,7 @@ router.post('/login',async(req,res)=>{
             authtoken
         });
     } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         console.log("Internal server error");
         res.send({error});
     }

@@ -42,7 +42,7 @@ export async function registeruser(credentials:any){
 /* Login*/
 export async function login(credential:any){
     try {
-        console.log(credential);
+        // console.log(credential);
         const {username,password}=credential;
         const {data}= await axios.post('/api/auth/login',{name:username,password:password})
         return Promise.resolve({data});

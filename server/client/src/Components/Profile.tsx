@@ -14,7 +14,7 @@ const Profile = () => {
   // const {auth}=useAuthStore((state)=>state);
   // const [{isLoading,apiData,serverError}]=useFetch(`/getuser/${auth.username}`);
   const [{isLoading,apiData,serverError}]=useFetch('');
-  console.log(apiData)
+  // console.log(apiData)
   const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {
@@ -36,7 +36,6 @@ const Profile = () => {
         success:<b>Successfully Updated</b>,
         error:<b>unable to update</b>
       })
-      // console.log(values)
     }
   })
   const  onupload=async (e:any) =>{
