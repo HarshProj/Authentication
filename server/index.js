@@ -9,14 +9,14 @@ app.use(cors());
 app.use(express.json());
 const port =process.env.Port;
 // serving the frontEnd
-app.use(express.static(path.join(__dirname , "./client/build")))
+app.use(express.static(path.join(__dirname , "./client/dist")))
 // console.log(__dirname)
 app.use('/api/auth',require('./Routes/auth'));
 app.use('/api/profile',require('./Routes/profile'));
 
 app.get("*"  ,(req,res)=> {
     res.sendFile(
-        path.join(__dirname , "./client/build/index.html"),
+        path.join(__dirname , "./client/dist/index.html"),
 
         function(err){
             res.status(500).send(err)
