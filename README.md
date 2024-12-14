@@ -15,7 +15,10 @@ SafeSign is an advanced authentication system designed to provide a seamless, se
 - **Biometric Authentication (Future Scope)**: Future integration of fingerprint and facial recognition for enhanced security.
 
   ## User Profile
-![image](https://github.com/user-attachments/assets/40d33f0f-33f1-412a-80d8-9496723ee60b)
+![image](https://github.com/user-attachments/assets/ea7fa9dc-4be3-44ba-b112-520ebc7de5b7)
+
+## Responsive Design
+![image](https://github.com/user-attachments/assets/2bad1ff0-7c50-48fe-a9ee-563c64bd462c)
 
 ## Installation
 
