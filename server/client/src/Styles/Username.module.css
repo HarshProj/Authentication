@@ -17,8 +17,15 @@
     background-color: #ff6a6a;
 } */
 .text_box{
-    @apply border-2 rounded-xl w-3/4 py-2 ;
+    @apply border-2 rounded-xl w-3/4 py-2 px-2 ;
 }
+/* .text_box {
+    border-width: 2px;
+    border-radius: 12px;
+    width: 75%;
+    padding: 8px;
+} */
+
 input[type='file']{
     display: none;
 }

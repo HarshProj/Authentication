@@ -12,7 +12,7 @@ const Register = () => {
   const navigate=useNavigate();
   const formik=useFormik({
     initialValues : {
-      Email:'adfmin@gmail.com',
+      Email:'admin@gmail.com',
       Username:'admin',
       Password:'gdgc$h'
     },

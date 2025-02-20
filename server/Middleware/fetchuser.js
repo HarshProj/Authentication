@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken');
 const JWT_SECRET="Userauth";
 const fetchuser=(req,res,next)=>{
-    console.log(req);
+    // console.log(req);
     const token=req.header('auth-token');
     // console.log(token)
     if(!token){

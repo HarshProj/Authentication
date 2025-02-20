@@ -13,11 +13,11 @@ const Recovery = () => {
   const navigate=useNavigate();
   const [OTP,setotp]=useState("");
   useEffect(()=>{
-    generateotp(auth.username).then((OTP)=>{
-      if(OTP){
-        return toast.success('OTP has been send to your email');
-      }
-      return toast.error("Problem while generating OTP");
+    let sendPromise=generateotp(auth.username);
+    toast.promise(sendPromise,{
+      loading:'Sending...',
+      success:<b>OTP has been send to your mail</b>,
+      error:<b>Could Not send OTP</b>
     })
   },[auth.username])
 
@@ -46,9 +46,6 @@ const Recovery = () => {
       loading:'Sending...',
       success:<b>OTP has been send to your mail</b>,
       error:<b>Could Not send OTP</b>
-    })
-    sendPromise.then((OTP)=>{
-      console.log(OTP)
     })
   }
   return (

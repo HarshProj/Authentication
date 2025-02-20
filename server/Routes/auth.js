@@ -38,7 +38,7 @@ router.post('/register',async(req,res)=>{
         // user.save()
         // .then(result=>res.status(200).send({msg:"User Registered Successfully"}))
         // .catch(error=>res.status(500).send({error}));
-        const data={
+        const data={ 
             user:{
                 id:user.id
             }
@@ -125,6 +125,7 @@ router.get("/generateotp",verifyuser,localvariable,async(req,res)=>{
         lowerCaseAlphabets:false,
         upperCaseAlphabets:false,
         specialChars:false})
+        // console.log(req.app.locals.OTP);
     return res.status(200).send({code:req.app.locals.OTP});
 })
 router.get("/verifyotp",verifyuser,localvariable,async(req,res)=>{

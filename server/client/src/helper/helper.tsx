@@ -28,7 +28,8 @@ export async function getuser({username}:any){
 /*Register user */
 export async function registeruser(credentials:any){
     try {
-        const {data:{msg},status}=await axios.post(`api/auth/register`,credentials)
+        const {data:{msg},status}=await axios.post(`api/auth/register`,credentials);
+        console.log("Issue",msg);
         const {Username,Email}=credentials;
         if(status==200){
             await axios.post('api/auth/registermail',{username:Username,useremail:Email,text:msg})
